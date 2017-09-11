@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const contactsRoutes = require('./contacts')
+const signupRoutes = require('./signup')
 const contacts = require('../../models/contacts');
 const middlewares = require('../middlewares');
 
@@ -10,6 +11,7 @@ router.get('/', (request, response, next) => {
 })
 
 router.use('/contacts', contactsRoutes);
+router.use('/signup', signupRoutes);
 
 router.use(middlewares.logErrors);
 router.use(middlewares.errorHandler);
