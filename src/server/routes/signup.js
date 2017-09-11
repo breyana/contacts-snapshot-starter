@@ -28,6 +28,7 @@ router.post('/', (request, response, next) => {
       .then(username => response.redirect('/'))
       .catch(error => {
         console.warn(error)
+        response.render('auth/signup', { errorMessage: error })
         next()
       })
   }
