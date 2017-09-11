@@ -94,7 +94,7 @@ nav .search-form input {
   margin-top: 1em;
 }
 
-.new-contact-form-errors {
+.form-errors {
   color: red;
   font-weight: bold;
 }
