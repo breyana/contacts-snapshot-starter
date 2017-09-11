@@ -2,6 +2,9 @@
 
 <h2>Sign Up</h2>
   <form method="POST" action="/signup" class="form">
+      <% if (errorMessage) { %>
+        <pre class="form-errors"><%= errorMessage %></pre>
+      <% } %>
     <label>
       <span>Username:</span>
       <input name="username"></input>
