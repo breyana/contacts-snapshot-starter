@@ -5,9 +5,13 @@ const contacts = require('../../models/contacts');
 const middlewares = require('../middlewares');
 
 router.get('/', (request, response, next) => {
-  contacts.findAll()
+  if (!request.session.username) {
+    response.redirect('/signup')
+  } else {
+    contacts.findAll()
     .then((contacts) => {response.render('contacts/index', { contacts })})
     .catch( error => next(error) )
+  }
 })
 
 router.use('/contacts', contactsRoutes);
