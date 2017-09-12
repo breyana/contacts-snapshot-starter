@@ -10,4 +10,24 @@ router.get('/', (request, response) => {
   }
 })
 
+router.post('/', (request, response) => {
+  const username = request.body.username
+  const password = request.body.password
+  let errorMessage
+  users.findUser(username)
+    .then(user => bcrypt.compare(password, user[0].password))
+    .then(result => {
+      if (result) {
+        request.session.username = username
+        response.redirect('/')
+      } else {
+        throw new Error()
+      }
+    })
+    .catch(error => {
+      errorMessage = 'Incorrect email or password'
+      response.render('auth/login', {errorMessage})
+    })
+})
+
 module.exports = router
