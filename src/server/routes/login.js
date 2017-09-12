@@ -14,7 +14,7 @@ router.post('/', (request, response) => {
   const username = request.body.username
   const password = request.body.password
   let errorMessage
-  users.findUser(username)
+  users.findByUsername(username)
     .then(user => {
       bcrypt.compare(password, user[0].password)
       .then(result => {
