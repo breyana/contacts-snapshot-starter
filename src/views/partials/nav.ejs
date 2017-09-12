@@ -5,5 +5,10 @@
     <input type="submit" style="display: none" />
   </form>
   <a href="/contacts/new">New Contact</a>
-  <a href="/logout">Log Out</a>
+  <% if (session) {%>
+    <a href="/logout">Log Out</a>
+  <% } else { %>
+    <a href="/signup">Sign Up</a>
+    <a href="/login">Log In</a>
+  <% } %>
 </nav>
