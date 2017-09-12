@@ -32,6 +32,9 @@ router.get('/:contactId', (request, response, next) => {
 
 
 router.delete('/:contactId', (request, response, next) => {
+  if(!request.session.admin) {
+    response.sendStatus(403)
+  }
   const contactId = request.params.contactId
   contacts.destroy(contactId)
     .then(function(contact) {
