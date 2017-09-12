@@ -3,7 +3,11 @@ const contacts = require('../../models/contacts')
 const router = require('express').Router()
 
 router.get('/new', (request, response) => {
-  response.render('contacts/new')
+  if(request.session.admin) {
+    response.render('contacts/new')
+  } else {
+    response.sendStatus(403)
+  }
 })
 
 router.post('/', (request, response, next) => {
