@@ -15,14 +15,19 @@ router.post('/', (request, response) => {
   const password = request.body.password
   let errorMessage
   users.findUser(username)
-    .then(user => bcrypt.compare(password, user[0].password))
-    .then(result => {
-      if (result) {
-        request.session.username = username
-        response.redirect('/')
-      } else {
-        throw new Error()
-      }
+    .then(user => {
+      bcrypt.compare(password, user[0].password)
+      .then(result => {
+        if (result) {
+          if (user[0].role === 'admin') {
+            request.session.admin = true
+          }
+          request.session.username = username
+          response.redirect('/')
+        } else {
+          throw new Error()
+        }
+      })
     })
     .catch(error => {
       errorMessage = 'Incorrect email or password'
