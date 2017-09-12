@@ -7,7 +7,7 @@ const middlewares = require('../middlewares');
 
 router.get('/', (request, response, next) => {
   if (!request.session.username) {
-    response.redirect('/signup')
+    response.redirect('/login')
   } else {
     contacts.findAll()
     .then((contacts) => {response.render('contacts/index', { contacts })})
