@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 router.get('/', (request, response) => {
-  response.render('auth/signup', { errorMessage: undefined })
+  response.render('auth/signup')
 })
 
 router.post('/', (request, response, next) => {
