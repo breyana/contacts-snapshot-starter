@@ -3,7 +3,11 @@ const contacts = require('../../models/contacts')
 const router = require('express').Router()
 
 router.get('/new', (request, response) => {
-  response.render('contacts/new')
+  if(request.session.admin) {
+    response.render('contacts/new')
+  } else {
+    response.sendStatus(403)
+  }
 })
 
 router.post('/', (request, response, next) => {
@@ -28,6 +32,9 @@ router.get('/:contactId', (request, response, next) => {
 
 
 router.delete('/:contactId', (request, response, next) => {
+  if(!request.session.admin) {
+    response.sendStatus(403)
+  }
   const contactId = request.params.contactId
   contacts.destroy(contactId)
     .then(function(contact) {

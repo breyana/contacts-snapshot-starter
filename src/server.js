@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
 const methodOverride = require('method-override')
+const session = require('express-session')
 const routes = require('./server/routes');
 const middlewares = require('./server/middlewares');
 
@@ -12,6 +13,12 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use(methodOverride('_method'))
+
+app.use(session({
+  secret: 'super secret string',
+  resave: false,
+  saveUninitialized: false
+}))
 
 app.use(middlewares.setDefaultResponseLocals)
 
